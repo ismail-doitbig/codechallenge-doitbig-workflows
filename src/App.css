@@ -1,10 +1,10 @@
-.layout {
+.l {
   display: flex;
   height: 100vh;
   width: 100vw;
 }
 
-.main {
+.m {
   flex: 1;
   display: flex;
   align-items: center;
@@ -12,7 +12,7 @@
   padding: 24px;
 }
 
-.canvas-button {
+.cb {
   padding: 10px 20px;
   font-size: 14px;
   font-weight: 500;
@@ -24,16 +24,16 @@
   transition: border-color 0.15s, box-shadow 0.15s;
 }
 
-.canvas-button:hover {
+.cb:hover {
   border-color: #8e8e93;
 }
 
-.canvas-button.is-selected {
+.cb.sel {
   border-color: #0071e3;
   box-shadow: 0 0 0 2px rgba(0, 113, 227, 0.25);
 }
 
-.inspector {
+.insp {
   width: 320px;
   border-left: 1px solid #d2d2d7;
   background: #ffffff;
@@ -41,7 +41,7 @@
   flex-direction: column;
 }
 
-.inspector-header {
+.insp-h {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -49,13 +49,13 @@
   border-bottom: 1px solid #e5e5ea;
 }
 
-.inspector-title {
+.insp-t {
   font-size: 13px;
   font-weight: 600;
   color: #1d1d1f;
 }
 
-.inspector-close {
+.insp-x {
   background: transparent;
   border: none;
   font-size: 20px;
@@ -65,11 +65,11 @@
   padding: 0 4px;
 }
 
-.inspector-close:hover {
+.insp-x:hover {
   color: #1d1d1f;
 }
 
-.inspector-body {
+.insp-b {
   flex: 1;
   padding: 16px;
   overflow: auto;

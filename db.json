@@ -4,7 +4,7 @@
       "id": "main",
       "button": {
         "id": "btn-main",
-        "label": "Add +r emove the user and send email",
+        "label": "Add + remove the user and send email",
         "workflow": {
           "id": "wf-main",
           "steps": [
@@ -29,9 +29,9 @@
               "id": "seed-1",
               "actionId": "send_email",
               "config": {
-                "to": "alice@example.com",
-                "subject": "Welcome",
-                "body": "Hello there."
+                "to": "sina@example.com",
+                "subject": "Welcome and Byebye Sina",
+                "body": "Hello and Bye"
               }
             },
             {
@@ -49,12 +49,6 @@
   ],
   "users": [
     {
-      "id": 1,
-      "name": "Alice",
-      "email": "alice@example.com",
-      "status": "active"
-    },
-    {
       "id": 2,
       "name": "Bob",
       "email": "bob@example.com",
@@ -69,6 +63,51 @@
       "id": 4,
       "name": "Sina",
       "notes": "Add a mock user to try "
+    },
+    {
+      "name": "Sina",
+      "notes": "Add a mock user to try ",
+      "id": 5
+    },
+    {
+      "name": "Sina",
+      "notes": "Add a mock user to try ",
+      "id": 6
+    },
+    {
+      "name": "Sina",
+      "notes": "Add a mock user to try ",
+      "id": 7
+    },
+    {
+      "name": "Sina",
+      "notes": "Add a mock user to try ",
+      "id": 8
+    },
+    {
+      "name": "Sina",
+      "notes": "Add a mock user to try ",
+      "id": 9
+    },
+    {
+      "name": "Sina",
+      "notes": "Add a mock user to try ",
+      "id": 10
+    },
+    {
+      "name": "Sina",
+      "notes": "Add a mock user to try ",
+      "id": 11
+    },
+    {
+      "name": "Sina",
+      "notes": "Add a mock user to try ",
+      "id": 12
+    },
+    {
+      "name": "Sina",
+      "notes": "Add a mock user to try ",
+      "id": 13
     }
   ],
   "orders": [
@@ -174,7 +213,21 @@
       "body": "Hello there.",
       "sentAt": "2026-05-26T20:59:58.365Z",
       "id": 11
+    },
+    {
+      "to": "alice@example.com",
+      "subject": "Welcome",
+      "body": "Hello there.",
+      "sentAt": "2026-05-26T21:06:02.766Z",
+      "id": 12
     }
   ],
-  "slack_messages": []
+  "slack_messages": [
+    {
+      "channel": "#general",
+      "message": "Hello team,\nRemoved the user",
+      "postedAt": "2026-05-26T21:06:02.796Z",
+      "id": 1
+    }
+  ]
 }

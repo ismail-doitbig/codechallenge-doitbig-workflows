@@ -53,15 +53,12 @@ Feel free to add additional once if found useful
 - Focus on **non-technical usability**
 - Keep the experience clear and understandable
 - No real backend required — mocking is fine
-- You are free to implement however you see fit, just make sure that it's flexible enough
-
-We care more about your **thinking and decisions** than completeness.
 
 ---
 
 ## **Deliverables**
 
-- Working prototype (rough is fine)
+- Working prototype (no backend necessary)
 
 - 5–10 min Loom explaining:
   - Your approach
@@ -86,6 +83,20 @@ We care more about your **thinking and decisions** than completeness.
 - **2 points:** Thought process well explained
 - **2 points:** The process from start to finish is intuitive
 - **2 points:** Researched best approach
+
+**Max score: 10/10**
+
+---
+
+
+## **How most people fail the code challenge**
+
+- Vibecoded the app for 30min and make a quick loom explaining what you "made"
+- Low quality code
+- No research
+- Failed to test all scenarios for usability
+- Unprepared loom videos with 30 second uhms and clicking around
+- Didn't test if all common usecases made sense and was easy to use
 
 **Max score: 10/10**
 

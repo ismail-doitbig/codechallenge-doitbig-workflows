@@ -36,15 +36,15 @@ Create a simple but flexible system that allows a user to express:
 
 > “When I press this button → do X”
 
-You decide what X looks like.
-
-Examples could be:
+Actions include the following:
 
 - Send an email
 - Create/update a record
 - Delete record
 - Conditional actions
 - Send slack message
+
+Feel free to add additional once if found useful
 
 ---
 
@@ -81,9 +81,11 @@ We care more about your **thinking and decisions** than completeness.
 
 ## **You will be judged on**
 
-- **5 points:** Thought process & solution design
-- **3 points:** Ease of use
-- **2 points:** Code quality
+- **2 points:** All actions are clear and very userfriendly
+- **2 points:** Code is well structured to the best of your ability
+- **2 points:** Thought process well explained
+- **2 points:** The process from start to finish is intuitive
+- **2 points:** Researched best approach
 
 **Max score: 10/10**
 

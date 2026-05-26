@@ -23,10 +23,7 @@ Your task is to design and implement a way for users to define what happens when
 
 What “happens” is up to you — think in terms of actions like sending data, storing or updating information, or running processes.
 
-⚠️ Important:
-
-- Workflows should be **backend-oriented only** (e.g. send email, store data, call API)
-- Do **not** include UI-side effects (e.g. opening modals, alerts, visual changes) as part of the workflow
+Workflows should be **backend-oriented only** (e.g. send email, store data, call API)
 
 ---
 
@@ -36,7 +33,7 @@ Create a simple but flexible system that allows a user to express:
 
 > “When I press this button → do X”
 
-Actions include the following:
+Actions include at least the following:
 
 - Send an email
 - Create/update a record
@@ -58,7 +55,7 @@ Feel free to add additional once if found useful
 
 ## **Deliverables**
 
-- Working prototype (no backend necessary)
+- Working & well tested prototype (no backend necessary)
 
 - 5–10 min Loom explaining:
   - Your approach

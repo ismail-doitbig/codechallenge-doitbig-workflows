@@ -3,11 +3,15 @@ import { persist } from 'zustand/middleware'
 import { v4 as uuid } from 'uuid'
 import { Workflow } from '../domain/Workflow'
 
-const initialButton = () => ({
-  id: 'btn-' + uuid().slice(0, 8),
-  label: 'Click me',
-  workflow: new Workflow().toJSON(),
-})
+const initialButton = () => {
+  const wf = new Workflow()
+  wf.addStep('send_email', { to: '', subject: 'Welcome', body: '' })
+  return {
+    id: 'btn-' + uuid().slice(0, 8),
+    label: 'Click me',
+    workflow: wf.toJSON(),
+  }
+}
 
 const withWorkflow = (button, mutate) => {
   const wf = Workflow.fromJSON(button.workflow)

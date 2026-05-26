@@ -1,4 +1,5 @@
 import { useBuilderStore } from '../store/builderStore'
+import StepList from './StepList'
 
 export default function Sidebar() {
   const mode = useBuilderStore((s) => s.mode)
@@ -24,7 +25,12 @@ export default function Sidebar() {
       {selected && (
         <div className="flex-1 overflow-auto p-5 space-y-5">
           <LabelField value={button.label} onChange={setLabel} readOnly={mode !== 'design'} />
-          <div className="text-sm text-slate-400 italic">Step list goes here.</div>
+          <div>
+            <div className="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-2">
+              When clicked
+            </div>
+            <StepList readOnly={mode !== 'design'} />
+          </div>
         </div>
       )}
     </aside>

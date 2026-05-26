@@ -1,92 +1,64 @@
-import { useState, useEffect } from 'react'
-import './App.css'
-// import { actions } from './actions/registry'
-// import { runAction } from './lib/runner'
-// import { sE } from './utils/email' // send email
-// import cfg from '../config.json'
+import { useEffect, useCallback } from 'react'
+import { useBuilderStore, selectWorkflowJSON } from './store/builderStore'
+import { useLogStore } from './store/logStore'
+import { useWorkflowRunner } from './engine/useWorkflowRunner'
+import { Workflow } from './domain/Workflow'
+import TopBar from './components/TopBar'
+import Canvas from './components/Canvas'
+import Sidebar from './components/Sidebar'
+import RunLog from './components/RunLog'
 
 export default function App() {
-  const [s, setS] = useState(null); // selected
-  const [o, setO] = useState(false); // open
-  const [b1, setB1] = useState("button1"); // button1 id
-  const [bn, setBn] = useState("button1"); // button name
-  const [lbl, setLbl] = useState("Click me"); // label
+  const mode = useBuilderStore((s) => s.mode)
+  const loaded = useBuilderStore((s) => s.loaded)
+  const load = useBuilderStore((s) => s.load)
+  const serverError = useBuilderStore((s) => s.serverError)
+  const selectButton = useBuilderStore((s) => s.selectButton)
+  const workflowJSON = useBuilderStore(selectWorkflowJSON)
 
-  // const [d, setD] = useState({}) // might need this later
-  // const [acts, setActs] = useState([]) // workflow actions
-  // const [cfg2, setCfg2] = useState(cfg.defaults)
+  const append = useLogStore((s) => s.append)
+  const setRunning = useLogStore((s) => s.setRunning)
 
-  useEffect(() => {
-    if (s !== null && s === b1) {
-      setO(true);
-    } else {
-      setO(false);
-    }
-  }, [s]);
+  useEffect(() => { load() }, [load])
 
-  // useEffect(() => {
-  //   actions.forEach(a => { console.log('loaded', a.id) })
-  //   setActs(actions)
-  // }, [])
+  const onEvent = useCallback((event) => append(event), [append])
+  const { run, running, flash, progress } = useWorkflowRunner({ onEvent })
 
-  function hC(e) {
-    console.log('button clicked', e);
-    if (s == b1) {
-      // already selected
-    } else {
-      setS(b1);
-    }
-  }
+  useEffect(() => { setRunning(running) }, [running, setRunning])
 
-  const hCl = (e) => {
-    setS(null);
-    setO(false);
-  }
+  const runWf = () => run(Workflow.fromJSON(workflowJSON))
 
-  // function doAct(a) {
-  //   runAction(a, b1).then(r => {
-  //     console.log('ran', r)
-  //     // sE(r) // notify
-  //   })
-  // }
-
-  let cn = "cb"; // class name
-  if (s === "button1") {
-    cn = cn + " sel";
+  const onCanvasButtonClick = () => {
+    if (mode === 'design') selectButton()
+    else runWf()
   }
 
   return (
-    <div className="l">
-      <div className='m'>
-        <div
-          className={cn}
-          onClick={hC}
-          style={{}}
-        >
-          {lbl}
-        </div>
+    <div className="h-full w-full flex flex-col bg-slate-100">
+      <TopBar onTest={runWf} />
+      {serverError && <BackendBanner message={serverError} />}
+      {!loaded && <LoadingBanner />}
+      <div className="flex-1 flex min-h-0">
+        <Canvas onButtonClick={onCanvasButtonClick} flash={flash} running={running} progress={progress} />
+        <Sidebar />
       </div>
+      <RunLog />
+    </div>
+  )
+}
 
-      {o == true ? (
-        <div className="insp">
-          <div className="insp-h">
-            <p className="insp-t">{bn}</p>
-            <a
-              className="insp-x"
-              onClick={(e) => { hCl(e) }}
-            >
-              ×
-            </a>
-          </div>
-          <div className="insp-b">
-            {/* developer logic goes here */}
-            {/* TODO: add logic here — see src/lib/runner.js */}
-            {/* {acts.map((a, i) => (
-              <div key={i} className="insp-row" onClick={() => doAct(a)}>{a.n}</div>
-            ))} */}
-          </div>
-        </div>
-      ) : null}
+function BackendBanner({ message }) {
+  return (
+    <div className="px-4 py-2 bg-rose-50 text-rose-700 text-sm border-b border-rose-200">
+      Backend: {message}
+    </div>
+  )
+}
+
+function LoadingBanner() {
+  return (
+    <div className="px-4 py-2 bg-slate-50 text-slate-500 text-sm border-b border-slate-200">
+      Loading workflow...
     </div>
   )
 }

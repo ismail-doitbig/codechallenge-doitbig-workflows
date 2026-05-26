@@ -1,0 +1,233 @@
+{
+  "workflows": [
+    {
+      "id": "main",
+      "button": {
+        "id": "btn-main",
+        "label": "Add + remove the user and send email",
+        "workflow": {
+          "id": "wf-main",
+          "steps": [
+            {
+              "id": "c1e46674-e5cb-4904-ad3c-e41580189b13",
+              "actionId": "create_record",
+              "config": {
+                "collection": "users",
+                "notes": "Add a mock user to try ",
+                "name": "Sina"
+              }
+            },
+            {
+              "id": "845dd1aa-824c-45ff-8cf4-1ce55d0ed3b5",
+              "actionId": "delete_record",
+              "config": {
+                "collection": "users",
+                "recordId": "1"
+              }
+            },
+            {
+              "id": "seed-1",
+              "actionId": "send_email",
+              "config": {
+                "to": "sina@example.com",
+                "subject": "Welcome and Byebye Sina",
+                "body": "Hello and Bye"
+              }
+            },
+            {
+              "id": "9bf9e797-da6d-4793-9980-faefa3c5fcb2",
+              "actionId": "send_slack",
+              "config": {
+                "message": "Hello team,\nRemoved the user",
+                "channel": "#general"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "users": [
+    {
+      "id": 2,
+      "name": "Bob",
+      "email": "bob@example.com",
+      "status": "active"
+    },
+    {
+      "id": 3,
+      "name": "Test",
+      "notes": ""
+    },
+    {
+      "id": 4,
+      "name": "Sina",
+      "notes": "Add a mock user to try "
+    },
+    {
+      "name": "Sina",
+      "notes": "Add a mock user to try ",
+      "id": 5
+    },
+    {
+      "name": "Sina",
+      "notes": "Add a mock user to try ",
+      "id": 6
+    },
+    {
+      "name": "Sina",
+      "notes": "Add a mock user to try ",
+      "id": 7
+    },
+    {
+      "name": "Sina",
+      "notes": "Add a mock user to try ",
+      "id": 8
+    },
+    {
+      "name": "Sina",
+      "notes": "Add a mock user to try ",
+      "id": 9
+    },
+    {
+      "name": "Sina",
+      "notes": "Add a mock user to try ",
+      "id": 10
+    },
+    {
+      "name": "Sina",
+      "notes": "Add a mock user to try ",
+      "id": 11
+    },
+    {
+      "name": "Sina",
+      "notes": "Add a mock user to try ",
+      "id": 12
+    },
+    {
+      "name": "Sina",
+      "notes": "Add a mock user to try ",
+      "id": 13
+    }
+  ],
+  "orders": [
+    {
+      "id": 1,
+      "total": 49.99,
+      "status": "paid"
+    },
+    {
+      "id": 2,
+      "total": 12.5,
+      "status": "pending"
+    }
+  ],
+  "leads": [
+    {
+      "id": "l_1",
+      "name": "Northwind",
+      "stage": "new"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "t_1",
+      "title": "Onboard customer",
+      "done": false
+    }
+  ],
+  "emails": [
+    {
+      "to": "alice@example.com",
+      "subject": "Welcome",
+      "body": "Hello there.",
+      "sentAt": "2026-05-26T14:24:10.507Z",
+      "id": 1
+    },
+    {
+      "to": "alice@example.com",
+      "subject": "Welcome",
+      "body": "Hello there.",
+      "sentAt": "2026-05-26T14:25:36.395Z",
+      "id": 2
+    },
+    {
+      "to": "alice@example.com",
+      "subject": "Welcome",
+      "body": "Hello there.",
+      "sentAt": "2026-05-26T14:25:41.628Z",
+      "id": 3
+    },
+    {
+      "to": "alice@example.com",
+      "subject": "Welcome",
+      "body": "Hello there.",
+      "sentAt": "2026-05-26T14:25:48.734Z",
+      "id": 4
+    },
+    {
+      "to": "alice@example.com",
+      "subject": "Welcome",
+      "body": "Hello there.",
+      "sentAt": "2026-05-26T20:28:50.446Z",
+      "id": 5
+    },
+    {
+      "to": "alice@example.com",
+      "subject": "Welcome",
+      "body": "Hello there.",
+      "sentAt": "2026-05-26T20:31:25.891Z",
+      "id": 6
+    },
+    {
+      "to": "alice@example.com",
+      "subject": "Welcome",
+      "body": "Hello there.",
+      "sentAt": "2026-05-26T20:39:28.071Z",
+      "id": 7
+    },
+    {
+      "to": "alice@example.com",
+      "subject": "Welcome",
+      "body": "Hello there.",
+      "sentAt": "2026-05-26T20:40:03.418Z",
+      "id": 8
+    },
+    {
+      "to": "alice@example.com",
+      "subject": "Welcome",
+      "body": "Hello there.",
+      "sentAt": "2026-05-26T20:51:39.235Z",
+      "id": 9
+    },
+    {
+      "to": "alice@example.com",
+      "subject": "Welcome",
+      "body": "Hello there.",
+      "sentAt": "2026-05-26T20:51:45.465Z",
+      "id": 10
+    },
+    {
+      "to": "alice@example.com",
+      "subject": "Welcome",
+      "body": "Hello there.",
+      "sentAt": "2026-05-26T20:59:58.365Z",
+      "id": 11
+    },
+    {
+      "to": "alice@example.com",
+      "subject": "Welcome",
+      "body": "Hello there.",
+      "sentAt": "2026-05-26T21:06:02.766Z",
+      "id": 12
+    }
+  ],
+  "slack_messages": [
+    {
+      "channel": "#general",
+      "message": "Hello team,\nRemoved the user",
+      "postedAt": "2026-05-26T21:06:02.796Z",
+      "id": 1
+    }
+  ]
+}

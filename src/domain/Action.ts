@@ -38,15 +38,3 @@ export abstract class Action {
 }
 
 export type ActionClass = typeof Action & (new () => Action);
-
-export function delay(ms: number): Promise<void> {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
-
-export function randomLatency(): number {
-  return 400 + Math.floor(Math.random() * 800);
-}
-
-export function maybeFail(): boolean {
-  return Math.random() < 1 / 8;
-}

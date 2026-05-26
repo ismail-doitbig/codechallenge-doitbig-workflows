@@ -1,33 +1,15 @@
 import { create } from 'zustand'
-import { runWorkflow } from '../engine/runner'
 import { findActionClass } from '../domain/registry'
-
-let activeSub = null
 
 export const useLogStore = create((set, get) => ({
   entries: [],
   running: false,
-
+  setRunning: (running) => set({ running }),
+  append: (event) => set({ entries: [...get().entries, formatEvent(event)] }),
   clear: () => set({ entries: [] }),
-
-  start: (workflow) => {
-    if (get().running) return
-    if (activeSub) { activeSub.unsubscribe(); activeSub = null }
-    set({ running: true })
-    activeSub = runWorkflow(workflow).subscribe({
-      next: (event) => set({ entries: [...get().entries, format(event)] }),
-      complete: () => { set({ running: false }); activeSub = null },
-      error: () => { set({ running: false }); activeSub = null },
-    })
-  },
-
-  stop: () => {
-    if (activeSub) { activeSub.unsubscribe(); activeSub = null }
-    set({ running: false })
-  },
 }))
 
-const format = (event) => {
+export const formatEvent = (event) => {
   const time = new Date(event.ts).toLocaleTimeString()
   const cls = event.actionId ? findActionClass(event.actionId) : null
   const labelFor = (idx) => cls ? `${cls.label} #${idx + 1}` : `step #${idx + 1}`

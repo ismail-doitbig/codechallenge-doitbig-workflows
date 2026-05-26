@@ -1,4 +1,5 @@
-import { Action, FieldSchema, RunResult, delay, randomLatency, maybeFail } from '../Action';
+import { Action, FieldSchema, RunResult } from '../Action';
+import { api, ApiError } from '../../lib/api';
 
 export class SendEmailAction extends Action {
   static id = 'send_email';
@@ -13,11 +14,23 @@ export class SendEmailAction extends Action {
   ];
 
   async run(config: Record<string, any>): Promise<RunResult> {
-    await delay(randomLatency());
-    if (maybeFail()) {
-      return { ok: false, message: `Email to ${config.to || 'unknown'} bounced` };
+    if (!config.to) return { ok: false, message: 'No recipient set' };
+    if (!config.subject) return { ok: false, message: 'No subject set' };
+    try {
+      await api('/emails', {
+        method: 'POST',
+        body: JSON.stringify({
+          to: config.to,
+          subject: config.subject,
+          body: config.body || '',
+          sentAt: new Date().toISOString(),
+        }),
+      });
+      return { ok: true, message: `Sent email to ${config.to}` };
+    } catch (e) {
+      const msg = e instanceof ApiError ? e.message : String(e);
+      return { ok: false, message: msg };
     }
-    return { ok: true, message: `Sent email to ${config.to || 'unknown'}` };
   }
 
   summary(config: Record<string, any>): string {

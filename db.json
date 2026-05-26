@@ -1,0 +1,37 @@
+{
+  "workflows": [
+    {
+      "id": "main",
+      "button": {
+        "id": "btn-main",
+        "label": "Click me",
+        "workflow": {
+          "id": "wf-main",
+          "steps": [
+            {
+              "id": "seed-1",
+              "actionId": "send_email",
+              "config": { "to": "alice@example.com", "subject": "Welcome", "body": "Hello there." }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "users": [
+    { "id": "u_1", "name": "Alice", "email": "alice@example.com", "status": "active" },
+    { "id": "u_2", "name": "Bob",   "email": "bob@example.com",   "status": "active" }
+  ],
+  "orders": [
+    { "id": "o_1", "total": 49.99, "status": "paid" },
+    { "id": "o_2", "total": 12.50, "status": "pending" }
+  ],
+  "leads": [
+    { "id": "l_1", "name": "Northwind", "stage": "new" }
+  ],
+  "tasks": [
+    { "id": "t_1", "title": "Onboard customer", "done": false }
+  ],
+  "emails": [],
+  "slack_messages": []
+}

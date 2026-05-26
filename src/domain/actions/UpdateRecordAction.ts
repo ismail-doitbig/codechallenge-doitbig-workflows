@@ -1,4 +1,12 @@
-import { Action, FieldSchema, RunResult, delay, randomLatency, maybeFail } from '../Action';
+import { Action, FieldSchema, RunResult } from '../Action';
+import { api, ApiError } from '../../lib/api';
+
+const COLLECTIONS = [
+  { value: 'users', label: 'Users' },
+  { value: 'orders', label: 'Orders' },
+  { value: 'leads', label: 'Leads' },
+  { value: 'tasks', label: 'Tasks' },
+];
 
 export class UpdateRecordAction extends Action {
   static id = 'update_record';
@@ -7,32 +15,26 @@ export class UpdateRecordAction extends Action {
   static color = '#0ea5e9';
   static description = 'Modify fields on an existing record';
   static fields: FieldSchema[] = [
-    {
-      key: 'collection',
-      label: 'Collection',
-      type: 'select',
-      required: true,
-      options: [
-        { value: 'users', label: 'Users' },
-        { value: 'orders', label: 'Orders' },
-        { value: 'leads', label: 'Leads' },
-        { value: 'tasks', label: 'Tasks' },
-      ],
-    },
-    { key: 'recordId', label: 'Record ID', type: 'text', placeholder: 'rec_abc123', required: true },
-    { key: 'field', label: 'Field to update', type: 'text', placeholder: 'status' },
+    { key: 'collection', label: 'Collection', type: 'select', required: true, options: COLLECTIONS },
+    { key: 'recordId', label: 'Record ID', type: 'text', placeholder: 'u_1', required: true, help: 'Try u_1 or o_1 from the seed data' },
+    { key: 'field', label: 'Field to update', type: 'text', placeholder: 'status', required: true },
     { key: 'value', label: 'New value', type: 'text', placeholder: 'archived' },
   ];
 
   async run(config: Record<string, any>): Promise<RunResult> {
-    await delay(randomLatency());
-    if (maybeFail()) {
-      return { ok: false, message: `Update on ${config.recordId || '?'} rejected by server` };
+    if (!config.collection) return { ok: false, message: 'No collection chosen' };
+    if (!config.recordId) return { ok: false, message: 'Record ID is required' };
+    if (!config.field) return { ok: false, message: 'Field is required' };
+    try {
+      await api(`/${config.collection}/${config.recordId}`, {
+        method: 'PATCH',
+        body: JSON.stringify({ [config.field]: config.value ?? '' }),
+      });
+      return { ok: true, message: `Updated ${config.recordId}.${config.field}` };
+    } catch (e) {
+      const msg = e instanceof ApiError ? e.message : String(e);
+      return { ok: false, message: msg };
     }
-    return {
-      ok: true,
-      message: `Updated ${config.recordId || '?'} (${config.field || 'field'} = ${config.value ?? '""'})`,
-    };
   }
 
   summary(config: Record<string, any>): string {

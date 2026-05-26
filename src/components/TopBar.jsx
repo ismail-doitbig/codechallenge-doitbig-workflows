@@ -12,6 +12,15 @@ export default function TopBar({ onTest }) {
       </div>
 
       <div className="flex items-center gap-3">
+        <a
+          href="?view=user"
+          target="_blank"
+          rel="noreferrer"
+          className="text-xs text-slate-500 hover:text-indigo-600 px-2 py-1 rounded"
+          title="Open the end user view in a new tab"
+        >
+          ↗ Open user view
+        </a>
         {mode === 'design' && (
           <button
             type="button"

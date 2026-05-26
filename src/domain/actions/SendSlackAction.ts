@@ -1,4 +1,5 @@
-import { Action, FieldSchema, RunResult, delay, randomLatency, maybeFail } from '../Action';
+import { Action, FieldSchema, RunResult } from '../Action';
+import { api, ApiError } from '../../lib/api';
 
 export class SendSlackAction extends Action {
   static id = 'send_slack';
@@ -12,11 +13,22 @@ export class SendSlackAction extends Action {
   ];
 
   async run(config: Record<string, any>): Promise<RunResult> {
-    await delay(randomLatency());
-    if (maybeFail()) {
-      return { ok: false, message: `Slack to ${config.channel || '?'} failed (rate limited)` };
+    if (!config.channel) return { ok: false, message: 'No channel set' };
+    if (!config.message) return { ok: false, message: 'Message is required' };
+    try {
+      await api('/slack_messages', {
+        method: 'POST',
+        body: JSON.stringify({
+          channel: config.channel,
+          message: config.message,
+          postedAt: new Date().toISOString(),
+        }),
+      });
+      return { ok: true, message: `Posted to ${config.channel}` };
+    } catch (e) {
+      const msg = e instanceof ApiError ? e.message : String(e);
+      return { ok: false, message: msg };
     }
-    return { ok: true, message: `Posted to ${config.channel || '?'}` };
   }
 
   summary(config: Record<string, any>): string {

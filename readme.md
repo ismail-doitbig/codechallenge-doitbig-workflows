@@ -95,8 +95,6 @@ Feel free to add additional once if found useful
 - Unprepared loom videos with 30 second uhms and clicking around
 - Didn't test if all common usecases made sense and was easy to use
 
-**Max score: 10/10**
-
 ---
 
 ## **Delivery**
